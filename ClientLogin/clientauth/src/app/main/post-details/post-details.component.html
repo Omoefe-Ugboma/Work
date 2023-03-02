@@ -1,1 +1,7 @@
-<p>post-details works!</p>
+
+<div *ngIf="post">
+    <h1>{{post.title}}</h1>
+    <p>{{post.description}}</p>
+
+    {{post.avg_ratings}} ({{post.no_of_rating}})
+</div>

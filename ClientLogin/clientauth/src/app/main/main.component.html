@@ -1,4 +1,4 @@
 <div class="layout">
-    <app-post-list></app-post-list>
-    <app-post-details></app-post-details>
+    <app-post-list [posts]="posts" (selectedPost)="selectPost($event)"></app-post-list>
+    <app-post-details [post]="this.selectedPost"></app-post-details>
 </div>

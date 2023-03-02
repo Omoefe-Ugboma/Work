@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/api.service';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+
 
 @Component({
   selector: 'app-post-list',
@@ -8,20 +8,17 @@ import { ApiService } from 'src/app/api.service';
 })
 export class PostListComponent implements OnInit{
    
-  posts: any = []; 
+  @Input() posts: any = []; 
+  @Output() selectedPost = new EventEmitter();
 
   constructor(
-    private apiService:ApiService
+    
   ){}
 
-  ngOnInit(): void {
-    this.apiService.getPosts().subscribe(
-      data =>{
-        this.posts = data;
-      },
-      error => {
-        console.log(error);
-      }
-    );
+  ngOnInit(): void {}
+  
+  postClicked(post:any){
+    this.selectedPost.emit(post);
   }
+
 }
