@@ -20,8 +20,19 @@ export class ApiService {
   ) { }
 
   getPosts(){
-    return this.httpClient.get(this.baseUrl, {headers: this.headers});
-    
+    return this.httpClient.get(this.baseUrl, {headers: this.headers}); 
     // return this._posts;
   }
+
+  getPost(id: number){
+    return this.httpClient.get(`${this.baseUrl}${id}/`, {headers: this.headers}); 
+    // return this._posts;
+  }
+   
+  ratePost(rate: number, postId: number){
+    const body = JSON.stringify({stars:rate});
+    return this.httpClient.post(`${this.baseUrl}${postId}/rate_post/`, body, {headers:this.headers});
+  }
+
+
 }

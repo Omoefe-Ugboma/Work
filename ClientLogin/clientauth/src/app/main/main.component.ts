@@ -11,6 +11,7 @@ export class MainComponent implements OnInit{
   posts: any = [];
 
   selectedPost = null;
+  editedPost: any = null;
 
   constructor(
     private apiService:ApiService
@@ -29,7 +30,21 @@ export class MainComponent implements OnInit{
 
   selectPost(post:any){
    this.selectedPost = post;
-   console.log('Selected', this.selectedPost)
+   this.editedPost = null;
+  }
+
+  editPost(post:any){
+   this.editedPost = post;
+   this.selectedPost = null;
+  }
+
+  createNewPost(){
+   this.editedPost = {title:'', description:''};
+   this.selectedPost = null;
+  }
+
+  deletedPost(post:any){
+    console.log('delete', post.title)
   }
 
 }

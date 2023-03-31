@@ -1,0 +1,16 @@
+i.orange{
+    color: orange;
+}
+
+i.purple{
+    color: purple;
+}
+
+#rate-container{
+    border-top: 2px solid purple;
+}
+
+#rate-container i{
+    cursor: pointer;
+    font-size: 2em;
+}

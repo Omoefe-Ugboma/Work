@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ApiService } from 'src/app/api.service';
 
 @Component({
   selector: 'app-post-details',
@@ -8,9 +9,32 @@ import { Component, OnInit, Input } from '@angular/core';
 export class PostDetailsComponent implements OnInit{
 
   @Input() post: any;
+  @Output() updatePost = new EventEmitter();
+  rateHovered = 0;
 
-  ngOnInit(): void {
-    
+  constructor(private apiService:ApiService){}
+
+  ngOnInit(): void {}
+
+  rateHover(rate:any){
+    this.rateHovered = rate;
+  }
+
+  rateClicked(rate:any){
+   this.apiService.ratePost(rate, this.post.id).subscribe(
+    result => this.getDetails(),
+    error => console.log(error)
+   );
+  }
+
+  getDetails(){
+    this.apiService.getPost(this.post.id).subscribe(
+      post =>{
+        this.updatePost.emit(post);
+        // console.log(result);
+      },
+      error => console.log(error)
+    );
   }
 
 }

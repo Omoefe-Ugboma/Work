@@ -1,7 +1,21 @@
 
 <div *ngIf="post">
     <h1>{{post.title}}</h1>
+    <i class="fas fa-star" [ngClass]="{'orange':post.avg_ratings > 0}"></i>
+    <i class="fas fa-star" [ngClass]="{'orange':post.avg_ratings > 1}"></i>
+    <i class="fas fa-star" [ngClass]="{'orange':post.avg_ratings > 2}"></i>
+    <i class="fas fa-star" [ngClass]="{'orange':post.avg_ratings > 3}"></i>
+    <i class="fas fa-star" [ngClass]="{'orange':post.avg_ratings > 4}"></i>
+    ({{post.no_of_rating}})
     <p>{{post.description}}</p>
+    <!-- <fa name="cog" animation="spin"></fa> -->
+    <!-- {{post.avg_ratings}}  -->
 
-    {{post.avg_ratings}} ({{post.no_of_rating}})
+    <div id="rate-container">
+        <h2>Rate it !!!</h2>
+        <i *ngFor="let rate of [1,2,3,4,5]" class="fas fa-star" (mouseenter)="rateHover(rate)"
+        (mouseleave)="rateHovered = 0" (click)="rateClicked(rate)"
+        [ngClass]="{'purple':rateHovered >= rate}"
+        ></i>
+    </div>
 </div>

@@ -1,0 +1,13 @@
+.post-item{
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+}
+
+.post-item i{
+    font-size: 1.5em;
+    margin: 15px 5px;
+    cursor: pointer;
+}
+i[name='fas']{
+    color: crimson;
+}
