@@ -1,8 +1,12 @@
+<button (click)="logout()">Logout</button>
 <div class="layout">
     <app-post-list [posts]="posts" (selectedPost)="selectPost($event)" (deletedPost)="deletedPost($event)"
     (editedPost)="editPost($event)" (createNewPost)="createNewPost()"></app-post-list>
     <div>
         <app-post-details [post]="this.selectedPost" (updatePost)="selectPost($event)"></app-post-details>
-        <app-post-form *ngIf="editedPost" (post)="editedPost"></app-post-form>
+        <app-post-form *ngIf="editedPost" 
+        [post]="this.editedPost" 
+        (postCreated)="postCreated($event)"
+        (postUpdated)="postUpdated($event)"></app-post-form>
     </div>
 </div>

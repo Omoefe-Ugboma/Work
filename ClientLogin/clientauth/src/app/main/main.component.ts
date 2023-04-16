@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api.service';
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -14,19 +16,33 @@ export class MainComponent implements OnInit{
   editedPost: any = null;
 
   constructor(
-    private apiService:ApiService
+    private apiService:ApiService,
+    private cookieService: CookieService,
+    private router: Router
   ){}
 
   ngOnInit(): void {
-    this.apiService.getPosts().subscribe(
-      data =>{
-        this.posts = data;
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    
+    const mrToken = this.cookieService.get('mr-token');
+    if(!mrToken){
+      this.router.navigate(['/auth']);
+    }else{
+      this.apiService.getPosts().subscribe(
+        data =>{
+          this.posts = data;
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    }
   }
+  
+  logout(){
+    this.cookieService.delete('mr-token');
+    this.router.navigate(['/auth']);
+  }
+  
 
   selectPost(post:any){
    this.selectedPost = post;
@@ -44,7 +60,24 @@ export class MainComponent implements OnInit{
   }
 
   deletedPost(post:any){
-    console.log('delete', post.title)
+   this.apiService.deletePost(post.id).subscribe(
+    data => {
+      this.posts = this.posts.filter((pos: { id: any; }) => pos.id !== post.id);
+    },
+    error => console.log(error)
+   );
   }
 
+  postCreated(post: any){
+    this.posts.push(post);
+    this.editedPost = null;
+  }
+
+  postUpdated(post: any){
+    const index = this.posts.findIndex((pos: { id: any; }) => pos.id === post.id);
+    if(index >= 0){
+      this.posts[index] = post;
+    }
+    this.editedPost = null;
+  }
 }

@@ -12,7 +12,7 @@ import { AppComponent } from './app.component';
 
 
 const routes: Routes = [
-  {path:'', pathMatch:'full', redirectTo:'posts'}
+  {path:'', pathMatch:'full', redirectTo:'auth'}
 ];
 
 @NgModule({

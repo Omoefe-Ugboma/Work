@@ -1,1 +1,11 @@
-<p>post-form works!</p>
+<form [formGroup]="postForm" (ngSubmit)="saveForm()">
+    <label>Post Title</label><br>
+    <input type="text" formControlName="title"/><br>
+
+    <label>Post Description</label><br>
+    <textarea type="text" formControlName="description"></textarea><br>
+    <button type="submit" [disabled]="formDisabled()">
+      <span *ngIf="id">Update Post</span>    
+      <span *ngIf="!id">Create Post</span>    
+    </button>
+</form>

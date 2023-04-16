@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MainComponent } from './main.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { ApiService } from '../api.service'; 
 
@@ -23,6 +23,7 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
   exports: [
